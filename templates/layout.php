@@ -83,7 +83,7 @@
     <header class="sticky top-0 z-20 border-b border-parchment-200/80 bg-parchment-50/95 backdrop-blur">
       <div class="flex items-center justify-between px-4 py-3">
         <a href="<?= e(url('/')) ?>" class="flex items-center gap-2 font-display text-2xl tracking-tight text-ginger-700">
-          <span aria-hidden="true">🐱</span> ArithmeCats
+          <span aria-hidden="true">🐱</span> MathCats
         </a>
         <div class="flex items-center gap-3 text-sm">
           <?php if ($currentUser): ?>

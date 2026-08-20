@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 return [
     'debug' => true,
-    'app_name' => 'ArithmeCats',
-    'base_url' => '', // e.g. '' when site is at domain root, or '/arithmecats' if in a subfolder
+    'app_name' => 'MathCats',
+    'base_url' => '', // e.g. '' when site is at domain root, or '/mathcats' if in a subfolder
     'timezone' => 'America/New_York',
-    'db_path' => dirname(__DIR__) . '/data/arithmecats.sqlite3',
+    'db_path' => dirname(__DIR__) . '/data/mathcats.sqlite3',
 ];

@@ -9,7 +9,7 @@ declare(strict_types=1);
  *
  * @return list<array{slug:string,name:string,rarity:string,tribe:string,flavor:string,art_key:string}>
  */
-function arithmecats_seed_cards(): array
+function mathcats_seed_cards(): array
 {
     return [
         // Common

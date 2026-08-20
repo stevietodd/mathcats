@@ -1,4 +1,4 @@
--- ArithmeCats schema (SQLite)
+-- MathCats schema (SQLite)
 
 PRAGMA foreign_keys = ON;
 

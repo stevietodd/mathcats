@@ -23,7 +23,7 @@ $ins = $pdo->prepare(
      VALUES (?, ?, ?, ?, ?, ?, ?)'
 );
 
-foreach (arithmecats_seed_cards() as $i => $card) {
+foreach (mathcats_seed_cards() as $i => $card) {
     [$slug, $name, $rarity, $tribe, $flavor, $artKey] = $card;
     $ins->execute([$slug, $name, $rarity, $tribe, $flavor, $artKey, $i + 1]);
 }
@@ -35,6 +35,6 @@ $pdo->prepare(
 
 $cardCount = (int) $pdo->query('SELECT COUNT(*) FROM cards')->fetchColumn();
 
-echo "ArithmeCats ready.\n";
+echo "MathCats ready.\n";
 echo "  {$cardCount} cards seeded\n";
 echo "  demo / cats1234\n";

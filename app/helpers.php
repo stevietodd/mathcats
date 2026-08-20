@@ -79,7 +79,7 @@ function render(string $template, array $data = []): void
     extract($data, EXTR_SKIP);
     $flashes = consume_flashes();
     $currentUser = Auth::user();
-    $appName = (string) config('app_name', 'ArithmeCats');
+    $appName = (string) config('app_name', 'MathCats');
     $templateFile = ROOT_PATH . '/templates/' . $template . '.php';
     if (!is_file($templateFile)) {
         http_response_code(500);

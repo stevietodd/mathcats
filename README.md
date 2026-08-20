@@ -1,4 +1,4 @@
-# ArithmeCats
+# MathCats
 
 Mobile-first PHP game: kids solve grade 3–5 arithmetic to open fantasy trading-card packs. Cats sit at the top of the rarity chart. The more answers they get right, the luckier the hero card.
 
@@ -12,7 +12,7 @@ Mobile-first PHP game: kids solve grade 3–5 arithmetic to open fantasy trading
 ## Local quick start
 
 ```bash
-cd arithmecats
+cd mathcats
 php bin/seed.php
 php -S 127.0.0.1:8000 -t public public/index.php
 ```
@@ -34,8 +34,8 @@ Problems and answers are stored on the server. Pack opening is a single POST; re
 
 ## DreamHost deploy
 
-1. Upload the project (e.g. `~/arithmecats`).
-2. Set the domain’s **web directory** to `arithmecats/public`.
+1. Upload the project (e.g. `~/mathcats`).
+2. Set the domain’s **web directory** to `mathcats/public`.
 3. Ensure `data/` is writable by the web server.
 4. SSH in and run `php bin/seed.php`.
 
