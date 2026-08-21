@@ -9,12 +9,19 @@ $opened = $pulled !== [];
   <?php if (!empty($lastResult)): ?>
     <div class="mt-4 rounded-2xl px-4 py-3 <?= !empty($lastResult['correct']) ? 'bg-green-100 text-green-900' : 'bg-amber-100 text-amber-900' ?>">
       <p class="font-extrabold"><?= e($lastResult['message']) ?></p>
-      <p class="mt-1 text-sm">
-        <?= e($lastResult['prompt']) ?> = <?= e((string) $lastResult['user_answer']) ?>
+      <div class="mt-2 flex flex-wrap items-end gap-4 text-sm">
+        <?php
+          $prompt = $lastResult['prompt'];
+          $size = 'sm';
+          $compact = true;
+          $showInput = false;
+          $answerText = (string) $lastResult['user_answer'];
+          require ROOT_PATH . '/templates/partials/stacked_problem.php';
+        ?>
         <?php if (empty($lastResult['correct'])): ?>
-          <span class="font-bold"> · answer was <?= (int) $lastResult['correct_answer'] ?></span>
+          <p class="font-bold">Answer was <?= (int) $lastResult['correct_answer'] ?></p>
         <?php endif; ?>
-      </p>
+      </div>
     </div>
   <?php endif; ?>
   <p class="mt-3 text-lg text-ink-500"><?= e($bandLabel) ?></p>

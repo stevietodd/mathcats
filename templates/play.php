@@ -11,30 +11,35 @@
   <?php if (!empty($lastResult)): ?>
     <div class="mt-4 rounded-2xl px-4 py-3 <?= !empty($lastResult['correct']) ? 'bg-green-100 text-green-900' : 'bg-amber-100 text-amber-900' ?>">
       <p class="font-extrabold"><?= e($lastResult['message']) ?></p>
-      <p class="mt-1 text-sm">
-        <?= e($lastResult['prompt']) ?> = <?= e((string) $lastResult['user_answer']) ?>
+      <div class="mt-2 flex flex-wrap items-end gap-4 text-sm">
+        <?php
+          $prompt = $lastResult['prompt'];
+          $size = 'sm';
+          $compact = true;
+          $showInput = false;
+          $answerText = (string) $lastResult['user_answer'];
+          require ROOT_PATH . '/templates/partials/stacked_problem.php';
+        ?>
         <?php if (empty($lastResult['correct'])): ?>
-          <span class="font-bold"> · answer was <?= (int) $lastResult['correct_answer'] ?></span>
+          <p class="font-bold">Answer was <?= (int) $lastResult['correct_answer'] ?></p>
         <?php endif; ?>
-      </p>
+      </div>
     </div>
   <?php endif; ?>
-
-  <h1 class="font-display mt-8 text-center text-5xl leading-tight sm:text-6xl"><?= e($problem['prompt']) ?></h1>
 
   <form method="post" action="<?= e(url('/play/answer')) ?>" class="mt-8" id="answer-form">
     <?= csrf_field() ?>
     <label class="sr-only" for="answer">Your answer</label>
-    <input
-      class="field-input text-center font-display text-4xl tracking-wide"
-      type="text"
-      inputmode="numeric"
-      pattern="-?[0-9]*"
-      name="answer"
-      id="answer"
-      autocomplete="off"
-      required
-    >
+    <div class="flex justify-center">
+      <?php
+        $prompt = $problem['prompt'];
+        $size = 'lg';
+        $compact = false;
+        $showInput = true;
+        $answerText = null;
+        require ROOT_PATH . '/templates/partials/stacked_problem.php';
+      ?>
+    </div>
 
     <div class="mt-4 grid grid-cols-3 gap-2" id="keypad">
       <?php foreach (['1','2','3','4','5','6','7','8','9'] as $n): ?>

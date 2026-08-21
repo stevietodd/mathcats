@@ -52,6 +52,43 @@ final class Problems
         };
     }
 
+    /**
+     * @return array{top:int,op:string,bottom:int}
+     */
+    public static function parse(string $prompt): array
+    {
+        $data = json_decode($prompt, true);
+        if (is_array($data) && isset($data['top'], $data['op'], $data['bottom'])) {
+            return [
+                'top' => (int) $data['top'],
+                'op' => (string) $data['op'],
+                'bottom' => (int) $data['bottom'],
+            ];
+        }
+
+        if (preg_match('/^(-?\d+)\s*([+\-−×÷])\s*(-?\d+)$/u', trim($prompt), $m)) {
+            return [
+                'top' => (int) $m[1],
+                'op' => $m[2] === '-' ? '−' : $m[2],
+                'bottom' => (int) $m[3],
+            ];
+        }
+
+        return ['top' => 0, 'op' => '+', 'bottom' => 0];
+    }
+
+    public static function encode(int $top, string $op, int $bottom): string
+    {
+        $json = json_encode(['top' => $top, 'op' => $op, 'bottom' => $bottom], JSON_UNESCAPED_UNICODE);
+        return is_string($json) ? $json : '{"top":0,"op":"+","bottom":0}';
+    }
+
+    /** @return array{prompt:string,answer:int} */
+    private static function make(int $top, string $op, int $bottom, int $answer): array
+    {
+        return ['prompt' => self::encode($top, $op, $bottom), 'answer' => $answer];
+    }
+
     /** @return array{prompt:string,answer:int} */
     private static function addition(): array
     {
@@ -62,20 +99,15 @@ final class Problems
             $a = random_int(10, 99);
             $b = random_int(10, 99);
         }
-        return ['prompt' => $a . ' + ' . $b, 'answer' => $a + $b];
+        return self::make($a, '+', $b, $a + $b);
     }
 
     /** @return array{prompt:string,answer:int} */
     private static function subtraction(): array
     {
-        if (random_int(1, 3) === 1) {
-            $a = random_int(100, 999);
-            $b = random_int(10, min(99, $a));
-        } else {
-            $a = random_int(20, 99);
-            $b = random_int(10, $a);
-        }
-        return ['prompt' => $a . ' − ' . $b, 'answer' => $a - $b];
+        $bottom = random_int(0, 9);
+        $top = random_int($bottom, 17);
+        return self::make($top, '−', $bottom, $top - $bottom);
     }
 
     /** @return array{prompt:string,answer:int} */
@@ -88,7 +120,7 @@ final class Problems
             $a = random_int(2, 12);
             $b = random_int(2, 12);
         }
-        return ['prompt' => $a . ' × ' . $b, 'answer' => $a * $b];
+        return self::make($a, '×', $b, $a * $b);
     }
 
     /** @return array{prompt:string,answer:int} */
@@ -102,7 +134,7 @@ final class Problems
             $quotient = random_int(2, 12);
         }
         $dividend = $divisor * $quotient;
-        return ['prompt' => $dividend . ' ÷ ' . $divisor, 'answer' => $quotient];
+        return self::make($dividend, '÷', $divisor, $quotient);
     }
 
     /**

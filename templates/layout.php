@@ -75,6 +75,10 @@
     .rarity-rare { --rarity: #2563eb; }
     .rarity-epic { --rarity: #7c3aed; }
     .rarity-legendary { --rarity: #c9a227; }
+    .math-problem { font-variant-numeric: tabular-nums; }
+    .math-problem input::-webkit-outer-spin-button,
+    .math-problem input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .math-problem input[type=text] { -moz-appearance: textfield; }
   </style>
 </head>
 <body class="min-h-screen bg-parchment-50 text-ink-900 antialiased">
